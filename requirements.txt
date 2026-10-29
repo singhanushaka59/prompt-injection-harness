@@ -1,0 +1,4 @@
+# No hard deps for stub/openai modes (stdlib only).
+# Optional, for extended coverage:
+# garak>=0.9
+# pyrit>=0.4
