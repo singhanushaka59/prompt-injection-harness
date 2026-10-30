@@ -22,6 +22,12 @@ the same workflow I use in assessments.
 > For deeper coverage, pair this with [`garak`](https://github.com/NVIDIA/garak) and
 > [`PyRIT`](https://github.com/Azure/PyRIT). This harness is the lightweight, explainable core.
 
+See **[`reports/demo.md`](reports/demo.md)** for a sample generated findings report (offline stub run).
+
+## Prerequisites
+- **Python 3.8+** — standard library only, **no external dependencies** to install.
+- (Optional) an OpenAI-compatible API key to test a real model (`--target openai`); the demo runs offline.
+
 ## Quickstart
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
