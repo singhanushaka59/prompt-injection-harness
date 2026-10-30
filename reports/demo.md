@@ -1,7 +1,7 @@
 # LLM Adversarial Findings Report
 
 **Target:** stub  
-**Date:** 2026-10-30 04:45  
+**Date:** 2026-10-30 21:40  
 **Prompts run:** 6 · **Vulnerable:** 5 · **Framework:** OWASP Top 10 for LLMs + MITRE ATLAS
 
 ## Summary

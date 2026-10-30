@@ -34,6 +34,12 @@ export LLM_API_KEY="sk-..."
 python harness.py --target openai --model gpt-4o-mini --out reports/run1.md
 ```
 
+## Tests
+Offline smoke tests (no API calls) cover the stub behaviour, scoring logic, and payload integrity:
+```bash
+python -m unittest discover -s tests -v
+```
+
 ## Attack classes covered
 | Class | OWASP-LLM | MITRE ATLAS (indicative) |
 |-------|-----------|--------------------------|
@@ -42,6 +48,15 @@ python harness.py --target openai --model gpt-4o-mini --out reports/run1.md
 | Jailbreak / guardrail bypass | LLM01 | AML.T0054 |
 | System-prompt / data exfiltration | LLM06 | AML.T0057 (LLM Data Leakage) |
 | Unsafe tool / agent action | LLM07 | AML.T0053 (LLM Plugin Compromise) |
+
+## Limitations
+This is a **lightweight, explainable core — not a full AI-security scanner.** Know its bounds:
+- **Small payload set.** Ships with 6 curated probes (one per attack class), not an exhaustive corpus. For breadth, pair with [`garak`](https://github.com/NVIDIA/garak) and [`PyRIT`](https://github.com/Azure/PyRIT).
+- **Heuristic detectors.** Scoring uses string/refusal heuristics (canary-leak, refusal markers, compliance keywords). Expect occasional false positives/negatives — **treat `REVIEW` verdicts, and ideally all findings, as needing manual confirmation.**
+- **Single-turn only.** Each probe is one request/response. Multi-turn and agentic (tool-chaining) injection are on the roadmap, not implemented.
+- **Demo stub is deliberately vulnerable.** `--target stub` always leaks/jailbreaks so the report is non-empty offline; it is a fixture, **not** a real model. Real results depend entirely on the target.
+- **No concurrency / rate-limit / retry logic.** Runs probes sequentially; not tuned for large suites.
+- **Not a benchmark.** Results are a point-in-time snapshot of one model + one system prompt, useful for demonstrating method and triaging — not for ranking models.
 
 ## Ethics / scope
 Test only models and endpoints you are authorized to test. The demo stub exists so this repo is
